@@ -15,10 +15,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class BuyXForYSpecialTest {
     @Mock private CartItem cartItem;
+    private BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00), 1);
 
     @Test
     void calculatesBuyXForYSpecial() {
-        BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00), 1);
         when(cartItem.getQuantity()).thenReturn(3);
         when(cartItem.getPrice()).thenReturn(new BigDecimal(2));
 
@@ -29,11 +29,21 @@ class BuyXForYSpecialTest {
 
     @Test
     void calculatesRemainingItemsAfterSpecial() {
-        BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00), 1);
         when(cartItem.getQuantity()).thenReturn(5);
         when(cartItem.getPrice()).thenReturn(new BigDecimal(2));
+
         BigDecimal total = buyXForYSpecial.calculateSpecial(cartItem);
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(9)));
+    }
+
+    @Test
+    void calculatesTotalWhenSpecialLimitExceeded() {
+        when(cartItem.getQuantity()).thenReturn(6);
+        when(cartItem.getPrice()).thenReturn(new BigDecimal(2));
+
+        BigDecimal total = buyXForYSpecial.calculateSpecial(cartItem);
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(11)));
     }
 }

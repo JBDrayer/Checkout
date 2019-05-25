@@ -8,10 +8,12 @@ import java.math.BigDecimal;
 public class BuyXForYSpecial implements ItemSpecial {
     private int quantityNeeded;
     private BigDecimal specialPrice;
+    private int specialLimit;
 
     public BuyXForYSpecial(int quantityNeeded, BigDecimal specialPrice, int specialLimit) {
         this.quantityNeeded = quantityNeeded;
         this.specialPrice = specialPrice;
+        this.specialLimit = specialLimit;
     }
 
     @Override
@@ -20,9 +22,13 @@ public class BuyXForYSpecial implements ItemSpecial {
         int quantity = cartItem.getQuantity();
         int numberOfQualifyingSpecials = quantity / quantityNeeded;
         int numberOfItemsRemaining = quantity;
+        int specialsUsed = 0;
         for (int index = 0; index < numberOfQualifyingSpecials; index++) {
-            total = total.add(specialPrice);
-            numberOfItemsRemaining -= quantityNeeded;
+            if(specialsUsed < specialLimit) {
+                total = total.add(specialPrice);
+                numberOfItemsRemaining -= quantityNeeded;
+                specialsUsed++;
+            }
         }
         total = total.add(cartItem.getPrice().multiply(new BigDecimal(numberOfItemsRemaining)));
         return BigDecimalFormatter.formatForMoney(total);
