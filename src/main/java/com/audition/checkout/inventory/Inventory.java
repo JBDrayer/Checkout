@@ -1,5 +1,7 @@
 package com.audition.checkout.inventory;
 
+import com.audition.checkout.ItemSpecial;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -26,5 +28,8 @@ public class Inventory {
                         .equalsIgnoreCase(itemName))
                 .findFirst()
                 .orElseThrow(() -> new InventoryItemNotFoundException(itemName + " not found in inventory"));
+    }
+
+    public void addSpecialToInventoryItem(ItemSpecial itemSpecial, String itemName) {
     }
 }

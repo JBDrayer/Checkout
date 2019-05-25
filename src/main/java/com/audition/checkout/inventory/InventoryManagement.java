@@ -25,5 +25,6 @@ public class InventoryManagement {
     }
 
     public void addSpecialToInventoryItem(ItemSpecial itemspecial, String itemName) {
+        inventory.addSpecialToInventoryItem(itemspecial, itemName);
     }
 }

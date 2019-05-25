@@ -1,5 +1,6 @@
 package com.audition.checkout.inventory;
 
+import com.audition.checkout.ItemSpecial;
 import com.audition.checkout.cart.Cart;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.when;
 class InventoryManagementTest {
 
     @Mock private InventoryItem inventoryItem;
+    @Mock private ItemSpecial itemSpecial;
     @Mock private Inventory inventory;
     @Mock private Cart cart;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
@@ -53,5 +55,12 @@ class InventoryManagementTest {
         inventoryManagement.markDownItem(itemName, markdown);
 
         verify(inventory).markDownItem(itemName, markdown);
+    }
+
+    @Test
+    void addsItemSpecialToInventory() {
+        inventoryManagement.addSpecialToInventoryItem(itemSpecial, itemName);
+
+        verify(inventory).addSpecialToInventoryItem(itemSpecial, itemName);
     }
 }
