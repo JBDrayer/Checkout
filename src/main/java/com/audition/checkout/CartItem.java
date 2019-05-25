@@ -1,5 +1,7 @@
 package com.audition.checkout;
 
+import java.math.BigDecimal;
+
 public class CartItem {
 
     private InventoryItem inventoryItem;
@@ -10,5 +12,9 @@ public class CartItem {
 
     public String getName() {
         return inventoryItem.getName();
+    }
+
+    public BigDecimal getPrice() {
+        return null;
     }
 }

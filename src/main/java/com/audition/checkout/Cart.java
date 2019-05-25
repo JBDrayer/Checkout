@@ -15,6 +15,10 @@ public class Cart {
     }
 
     public BigDecimal calculateTotal() {
-        return null;
+        BigDecimal total = BigDecimal.ZERO;
+        for(CartItem cartItem : cartItems){
+            total = total.add(cartItem.getPrice());
+        }
+        return total;
     }
 }
