@@ -26,6 +26,7 @@ public class Checkout {
         return cart.calculateTotal();
     }
 
-    public void markDownItem(String soup, BigDecimal bigDecimal) {
+    public void markDownItem(String itemName, BigDecimal markDown) {
+        inventoryManagement.markDownItem(itemName, markDown);
     }
 }

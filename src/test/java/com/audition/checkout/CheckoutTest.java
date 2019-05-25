@@ -20,6 +20,7 @@ class CheckoutTest {
     @Mock private InventoryManagement inventoryManagement;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
     private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal markDown = new BigDecimal(RandomUtils.nextInt(1,10));
     private Checkout checkout;
 
     @BeforeEach
@@ -39,6 +40,13 @@ class CheckoutTest {
         checkout.addWeightedItemToCart(itemName, weight);
 
         verify(inventoryManagement).addWeightedItemToCart(itemName, weight,cart);
+    }
+
+    @Test
+    void addsMarkdownToInventoryItem() {
+        checkout.markDownItem(itemName, markDown);
+
+        verify(inventoryManagement).markDownItem(itemName, markDown);
     }
 
     @Test
