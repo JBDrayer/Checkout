@@ -14,6 +14,6 @@ public class Inventory {
                 inventoryItem.getName()
                 .equalsIgnoreCase(itemName))
                 .findFirst()
-                .orElseThrow(() -> new InventoryItemNotFoundException(itemName + "not found in inventory"));
+                .orElseThrow(() -> new InventoryItemNotFoundException(itemName + " not found in inventory"));
     }
 }

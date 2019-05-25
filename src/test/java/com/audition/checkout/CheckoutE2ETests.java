@@ -35,11 +35,24 @@ class CheckoutE2ETests {
     @Test
     void calculatesTotalForMultipleItems() {
         checkout.addItemToCart("soup");
-        checkout.addItemToCart("soup");
 
         BigDecimal total = checkout.calculateTotal();
 
-        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
+    }
+
+    @Test
+    void calculatesTotalForWeightedItem() {
+        checkout.addItemToCart("ground beef");
+
+        BigDecimal total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.99)));
     }
 }
