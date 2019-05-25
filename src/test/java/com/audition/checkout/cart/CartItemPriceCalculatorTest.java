@@ -15,13 +15,22 @@ class CartItemPriceCalculatorTest {
     private BigDecimal price = new BigDecimal(RandomUtils.nextInt(1,10));
     private InventoryItem inventoryItem = new InventoryItem(itemName, price);
     private CartItem cartItem  = new CartItem(inventoryItem);
+    private CartItemPriceCalculator cartItemPriceCalculator = new CartItemPriceCalculator();
 
     @Test
     void calculatesItemPrice() {
-        CartItemPriceCalculator cartItemPriceCalculator = new CartItemPriceCalculator();
-
         BigDecimal total = cartItemPriceCalculator.calculateItemPrice(cartItem);
 
         assertThat(total).isEqualTo(price);
+    }
+
+    @Test
+    void calculatesWeightedItemPrice() {
+        BigDecimal weight = new BigDecimal(1.5);
+        cartItem.setWeight(weight);
+
+        BigDecimal total = cartItemPriceCalculator.calculateItemPrice(cartItem);
+
+        assertThat(total).isEqualTo(price.multiply(weight));
     }
 }

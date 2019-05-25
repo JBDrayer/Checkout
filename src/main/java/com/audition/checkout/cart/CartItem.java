@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class CartItem {
     private InventoryItem inventoryItem;
-    private BigDecimal weight;
+    private BigDecimal weight = BigDecimal.ZERO;
 
     public CartItem(InventoryItem inventoryItem) {
         this.inventoryItem = inventoryItem;
@@ -24,7 +24,7 @@ public class CartItem {
         return weight;
     }
 
-    void setWeight(BigDecimal weight) {
-        this.weight = weight;
+    void setWeight(BigDecimal weightToAdd) {
+        weight = weight.add(weightToAdd);
     }
 }
