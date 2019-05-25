@@ -18,10 +18,11 @@ public class Checkout {
         inventoryManagement.addItemToCart(itemName, cart);
     }
 
-    public BigDecimal calculateTotal() {
-        return cart.calculateTotal();
+    public void addWeightedItemToCart(String itemName, BigDecimal weight) {
+        inventoryManagement.addWeightedItemToCart(itemName, weight, cart);
     }
 
-    public void addWeightedItemToCart(String itemName, BigDecimal weight) {
+    public BigDecimal calculateTotal() {
+        return cart.calculateTotal();
     }
 }
