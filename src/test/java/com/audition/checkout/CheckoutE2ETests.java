@@ -8,10 +8,12 @@ import java.math.RoundingMode;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CheckoutE2ETests {
-    private Checkout checkout = new Checkout();
+    private Cart cart = new Cart();
+    private InventoryManagement inventoryManagement = new InventoryManagement();
+    private Checkout checkout = new Checkout(cart, inventoryManagement);
     @Test
     void calculatesTotalForItem() {
-        checkout.addItem("soup");
+        checkout.addItemToCart("soup");
 
         BigDecimal total = checkout.calculateTotal();
 
