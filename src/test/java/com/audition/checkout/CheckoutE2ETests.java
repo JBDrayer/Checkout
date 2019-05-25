@@ -209,4 +209,25 @@ class CheckoutE2ETests {
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.67)));
     }
+
+    @Test
+    void removingAnItemFromCartRemovesItemPriceFromTotal() {
+        checkout.addItemToCart("soup");
+
+        BigDecimal total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
+
+        checkout.removeItemFromCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
+    }
 }

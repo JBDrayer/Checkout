@@ -34,4 +34,7 @@ public class Checkout {
     public void addSpecialToInventoryItem(ItemSpecial itemSpecial, String itemName) {
         inventoryManagement.addSpecialToInventoryItem(itemSpecial, itemName);
     }
+
+    public void removeItemFromCart(String soup) {
+    }
 }
