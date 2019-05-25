@@ -7,6 +7,7 @@ import com.audition.checkout.inventory.Inventory;
 import com.audition.checkout.inventory.InventoryItem;
 import com.audition.checkout.inventory.InventoryManagement;
 import com.audition.checkout.special.BuyOneGetOneSpecial;
+import com.audition.checkout.special.BuyXGetYForZSpecial;
 import com.audition.checkout.utils.BigDecimalFormatter;
 import org.junit.jupiter.api.Test;
 
@@ -114,5 +115,27 @@ class CheckoutE2ETests {
         total = checkout.calculateTotal();
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
+    }
+
+    @Test
+    void calculatesTotalForBuyXGetYForZSpecial() {
+        checkout.addSpecialToInventoryItem(new BuyXGetYForZSpecial(2,1,new BigDecimal(.5)), "soup");
+        checkout.addItemToCart("soup");
+
+        BigDecimal total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(4.72)));
     }
 }
