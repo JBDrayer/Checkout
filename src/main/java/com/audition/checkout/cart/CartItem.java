@@ -24,7 +24,7 @@ public class CartItem {
         return weight;
     }
 
-    void setWeight(BigDecimal weightToAdd) {
+    void updateWeight(BigDecimal weightToAdd) {
         weight = weight.add(weightToAdd);
     }
 }

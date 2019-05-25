@@ -21,11 +21,12 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CartTest {
     @Mock private CartItemPriceCalculator cartItemPriceCalculator;
-    @Mock private InventoryItem inventoryItem;
-    @Mock private CartItem cartItem;
-    private List<CartItem> cartItems = new ArrayList<>();
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
     private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal price= new BigDecimal(RandomUtils.nextInt(1,10));
+    private InventoryItem inventoryItem = new InventoryItem(itemName, price);
+    private CartItem cartItem = new CartItem(inventoryItem);
+    private List<CartItem> cartItems = new ArrayList<>();
     private Cart cart;
 
     @BeforeEach
@@ -35,8 +36,6 @@ class CartTest {
 
     @Test
     void addItemToCart() {
-        when(inventoryItem.getName()).thenReturn(itemName);
-
         cart.addItem(inventoryItem);
 
         assertThat(cartItems).isNotEmpty();
@@ -56,12 +55,24 @@ class CartTest {
 
     @Test
     void addWeightedItemToCart() {
-        when(inventoryItem.getName()).thenReturn(itemName);
-
         cart.addWeightedItem(inventoryItem, weight);
 
         assertThat(cartItems).isNotEmpty();
         assertThat(cartItems.get(0).getName()).isEqualTo(itemName);
         assertThat(cartItems.get(0).getWeight()).isEqualTo(weight);
+    }
+
+    @Test
+    void addsWeightToExistingItemIfWeightedItemAlreadyInCart() {
+        List<CartItem> cartItems = new ArrayList<>();
+        cartItems.add(cartItem);
+        cartItem.updateWeight(weight);
+        cart = new Cart(cartItems, cartItemPriceCalculator);
+
+        cart.addWeightedItem(inventoryItem, weight);
+
+        assertThat(cartItems.size()).isEqualTo(1);
+        assertThat(cartItems.get(0).getName()).isEqualTo(itemName);
+        assertThat(cartItems.get(0).getWeight()).isEqualTo(weight.multiply(new BigDecimal(2)));
     }
 }

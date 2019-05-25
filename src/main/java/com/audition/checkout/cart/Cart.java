@@ -5,6 +5,7 @@ import com.audition.checkout.utils.BigDecimalFormatter;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class Cart {
     private List<CartItem> cartItems;
@@ -20,9 +21,22 @@ public class Cart {
     }
 
     public void addWeightedItem(InventoryItem inventoryItem, BigDecimal weight) {
-        CartItem cartItem = new CartItem(inventoryItem);
-        cartItem.setWeight(weight);
-        cartItems.add(cartItem);
+        Optional<CartItem> optionalCartItem  = getItemFromCart(inventoryItem);
+        if(optionalCartItem.isPresent()){
+            CartItem cartItem = optionalCartItem.get();
+            cartItem.updateWeight(weight);
+        }else {
+            CartItem cartItem = new CartItem(inventoryItem);
+            cartItem.updateWeight(weight);
+            cartItems.add(cartItem);
+        }
+    }
+
+    private Optional<CartItem> getItemFromCart(InventoryItem inventoryItem) {
+        return cartItems.stream().filter(cartItem ->
+                cartItem.getName()
+                .equalsIgnoreCase(inventoryItem.getName()))
+                .findFirst();
     }
 
     public BigDecimal calculateTotal() {
