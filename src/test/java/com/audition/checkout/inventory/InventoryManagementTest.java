@@ -1,5 +1,9 @@
-package com.audition.checkout;
+package com.audition.checkout.inventory;
 
+import com.audition.checkout.cart.Cart;
+import com.audition.checkout.inventory.Inventory;
+import com.audition.checkout.inventory.InventoryItem;
+import com.audition.checkout.inventory.InventoryManagement;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

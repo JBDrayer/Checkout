@@ -1,5 +1,9 @@
-package com.audition.checkout;
+package com.audition.checkout.cart;
 
+import com.audition.checkout.cart.Cart;
+import com.audition.checkout.cart.CartItem;
+import com.audition.checkout.inventory.InventoryItem;
+import com.audition.checkout.utils.BigDecimalFormatter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,6 +44,5 @@ class CartTest {
         BigDecimal total = cart.calculateTotal();
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(2)));
-
     }
 }

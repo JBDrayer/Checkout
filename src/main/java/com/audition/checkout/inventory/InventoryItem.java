@@ -1,4 +1,4 @@
-package com.audition.checkout;
+package com.audition.checkout.inventory;
 
 import java.math.BigDecimal;
 

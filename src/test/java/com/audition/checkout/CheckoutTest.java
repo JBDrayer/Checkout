@@ -1,5 +1,7 @@
 package com.audition.checkout;
 
+import com.audition.checkout.cart.Cart;
+import com.audition.checkout.inventory.InventoryManagement;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,6 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class CheckoutTest {
-
     @Mock private Cart cart;
     @Mock private InventoryManagement inventoryManagement;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
@@ -35,5 +36,4 @@ class CheckoutTest {
 
         verify(cart).calculateTotal();
     }
-
 }

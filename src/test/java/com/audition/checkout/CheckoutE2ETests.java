@@ -1,5 +1,11 @@
 package com.audition.checkout;
 
+import com.audition.checkout.cart.Cart;
+import com.audition.checkout.cart.CartItem;
+import com.audition.checkout.inventory.Inventory;
+import com.audition.checkout.inventory.InventoryItem;
+import com.audition.checkout.inventory.InventoryManagement;
+import com.audition.checkout.utils.BigDecimalFormatter;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

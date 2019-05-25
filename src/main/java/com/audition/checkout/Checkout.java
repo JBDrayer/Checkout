@@ -1,5 +1,8 @@
 package com.audition.checkout;
 
+import com.audition.checkout.cart.Cart;
+import com.audition.checkout.inventory.InventoryManagement;
+
 import java.math.BigDecimal;
 
 public class Checkout {

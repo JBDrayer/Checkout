@@ -1,7 +1,7 @@
-package com.audition.checkout;
+package com.audition.checkout.inventory;
 
 public class InventoryItemNotFoundException extends RuntimeException{
-    public InventoryItemNotFoundException(String message) {
+    InventoryItemNotFoundException(String message) {
         super(message);
     }
 }
