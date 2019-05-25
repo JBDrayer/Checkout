@@ -35,7 +35,7 @@ class CartItemPriceCalculatorTest {
     @Test
     void calculatesWeightedItemPrice() {
         BigDecimal weight = new BigDecimal(1.5);
-        cartItem.updateWeight(weight);
+        cartItem.addWeight(weight);
 
         BigDecimal total = cartItemPriceCalculator.calculateItemPrice(cartItem);
 

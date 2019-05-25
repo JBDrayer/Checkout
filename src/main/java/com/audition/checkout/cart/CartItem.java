@@ -26,8 +26,12 @@ public class CartItem {
         return weight;
     }
 
-    void updateWeight(BigDecimal weightToAdd) {
+    void addWeight(BigDecimal weightToAdd) {
         weight = weight.add(weightToAdd);
+    }
+
+    void removeWeight(BigDecimal weightToRemove) {
+        weight = weight.subtract(weightToRemove);
     }
 
     ItemSpecial getItemSpecial() {

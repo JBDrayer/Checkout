@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 class CartTest {
     @Mock private CartItemPriceCalculator cartItemPriceCalculator;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
-    private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(5,10));
     private BigDecimal price= new BigDecimal(RandomUtils.nextInt(1,10));
     private InventoryItem inventoryItem = new InventoryItem(itemName, price);
     private CartItem cartItem = new CartItem(inventoryItem);
@@ -71,6 +71,28 @@ class CartTest {
         assertThrows(CartItemNotFoundException.class, () -> cart.removeItem(itemName));
     }
 
+    @Test
+    void removesWeightFromItemInCart() {
+        cartItem.addWeight(weight);
+        cartItems.add(cartItem);
+        cart = new Cart(cartItems, cartItemPriceCalculator);
+        BigDecimal weightToRemove = new BigDecimal(RandomUtils.nextInt(1,4));
+
+        cart.removeWeightedItem(itemName, weightToRemove);
+
+        assertThat(cartItems.size()).isEqualTo(1);
+        assertThat(cartItems.get(0)).isEqualTo(cartItem);
+        assertThat(cartItems.get(0).getWeight()).isEqualTo(weight.subtract(weightToRemove));
+    }
+
+    @Test
+    void removesWeightedItemFromCartIfItemWeightIsLessThanOrEqualToZero() {
+        cart.addWeightedItem(inventoryItem, weight);
+
+        cart.removeWeightedItem(itemName, weight);
+
+        assertThat(cartItems.size()).isEqualTo(0);
+    }
 
     @Test
     void updatesQuantityIfItemAlreadyInCart() {
@@ -107,7 +129,7 @@ class CartTest {
     void addsWeightToExistingItemIfWeightedItemAlreadyInCart() {
         List<CartItem> cartItems = new ArrayList<>();
         cartItems.add(cartItem);
-        cartItem.updateWeight(weight);
+        cartItem.addWeight(weight);
         cart = new Cart(cartItems, cartItemPriceCalculator);
 
         cart.addWeightedItem(inventoryItem, weight);

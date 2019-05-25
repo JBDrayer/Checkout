@@ -44,19 +44,23 @@ public class Cart {
         Optional<CartItem> optionalCartItem = getItemFromCart(inventoryItem.getName());
         if (optionalCartItem.isPresent()) {
             CartItem cartItem = optionalCartItem.get();
-            cartItem.updateWeight(weight);
+            cartItem.addWeight(weight);
         } else {
             CartItem cartItem = new CartItem(inventoryItem);
-            cartItem.updateWeight(weight);
+            cartItem.addWeight(weight);
             cartItems.add(cartItem);
         }
     }
 
-    private Optional<CartItem> getItemFromCart(String itemName) {
-        return cartItems.stream().filter(cartItem ->
-                cartItem.getName()
-                        .equalsIgnoreCase(itemName))
-                .findFirst();
+    public void removeWeightedItem(String itemName, BigDecimal weight) {
+        Optional<CartItem> optionalCartItem = getItemFromCart(itemName);
+        if(optionalCartItem.isPresent()){
+            CartItem cartItem = optionalCartItem.get();
+            cartItem.removeWeight(weight);
+            if(cartItem.getWeight().compareTo(BigDecimal.ZERO) <= 0){
+                cartItems.remove(optionalCartItem.get());
+            }
+        }
     }
 
     public BigDecimal calculateTotal() {
@@ -67,6 +71,10 @@ public class Cart {
         return BigDecimalFormatter.formatForMoney(total);
     }
 
-    public void removeWeightedItem(String itemName, BigDecimal weight) {
+    private Optional<CartItem> getItemFromCart(String itemName) {
+        return cartItems.stream().filter(cartItem ->
+                cartItem.getName()
+                        .equalsIgnoreCase(itemName))
+                .findFirst();
     }
 }
