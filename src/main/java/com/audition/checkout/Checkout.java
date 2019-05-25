@@ -27,6 +27,10 @@ public class Checkout {
         inventoryManagement.addWeightedItemToCart(itemName, weight, cart);
     }
 
+    public void removeWeightedItemFromCart(String itemName, BigDecimal weight) {
+        cart.removeWeightedItem(itemName, weight);
+    }
+
     public void markDownItem(String itemName, BigDecimal markDown) {
         inventoryManagement.markDownItem(itemName, markDown);
     }
@@ -37,8 +41,5 @@ public class Checkout {
 
     public BigDecimal calculateTotal() {
         return cart.calculateTotal();
-    }
-
-    public void removeWeightedItemFromCart(String ground_beef, BigDecimal bigDecimal) {
     }
 }

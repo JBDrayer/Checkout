@@ -52,6 +52,13 @@ class CheckoutTest {
     }
 
     @Test
+    void removesWeightedItemFromCart() {
+        checkout.removeWeightedItemFromCart(itemName, weight);
+
+        verify(cart).removeWeightedItem(itemName, weight);
+    }
+
+    @Test
     void addsMarkdownToInventoryItem() {
         checkout.markDownItem(itemName, markDown);
 

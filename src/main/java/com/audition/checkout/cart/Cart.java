@@ -66,4 +66,7 @@ public class Cart {
         }
         return BigDecimalFormatter.formatForMoney(total);
     }
+
+    public void removeWeightedItem(String itemName, BigDecimal weight) {
+    }
 }
