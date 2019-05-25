@@ -16,6 +16,6 @@ public class Checkout {
     }
 
     public BigDecimal calculateTotal() {
-        return null;
+        return cart.calculateTotal();
     }
 }
