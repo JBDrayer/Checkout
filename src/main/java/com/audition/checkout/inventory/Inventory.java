@@ -22,14 +22,17 @@ public class Inventory {
         inventoryItem.setMarkDown(markdown);
     }
 
+
+    public void addSpecialToInventoryItem(ItemSpecial itemSpecial, String itemName) {
+        InventoryItem inventoryItem  = getInventoryItem(itemName);
+        inventoryItem.setItemSpecial(itemSpecial);
+    }
+
     private InventoryItem getInventoryItem(String itemName) {
         return inventoryItems.stream().filter(inventoryItem ->
                 inventoryItem.getName()
                         .equalsIgnoreCase(itemName))
                 .findFirst()
                 .orElseThrow(() -> new InventoryItemNotFoundException(itemName + " not found in inventory"));
-    }
-
-    public void addSpecialToInventoryItem(ItemSpecial itemSpecial, String itemName) {
     }
 }

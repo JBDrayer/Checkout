@@ -1,5 +1,6 @@
 package com.audition.checkout.inventory;
 
+import com.audition.checkout.ItemSpecial;
 import com.audition.checkout.utils.BigDecimalFormatter;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 public class InventoryItem {
     private String itemName;
     private BigDecimal price;
+    private ItemSpecial itemSpecial;
     private BigDecimal markDown = BigDecimal.ZERO;
 
     public InventoryItem(String itemName, BigDecimal price) {
@@ -24,5 +26,13 @@ public class InventoryItem {
 
     public void setMarkDown(BigDecimal markDown) {
         this.markDown = markDown;
+    }
+
+    public ItemSpecial getItemSpecial() {
+        return itemSpecial;
+    }
+
+    public void setItemSpecial(ItemSpecial itemSpecial) {
+        this.itemSpecial = itemSpecial;
     }
 }
