@@ -1,15 +1,21 @@
 package com.audition.checkout.cart;
 
+import com.audition.checkout.ItemSpecial;
 import com.audition.checkout.inventory.InventoryItem;
 import com.audition.checkout.utils.BigDecimalFormatter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 class CartItemPriceCalculatorTest {
 
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
@@ -17,6 +23,7 @@ class CartItemPriceCalculatorTest {
     private InventoryItem inventoryItem = new InventoryItem(itemName, price);
     private CartItem cartItem  = new CartItem(inventoryItem);
     private CartItemPriceCalculator cartItemPriceCalculator = new CartItemPriceCalculator();
+    @Mock private ItemSpecial itemSpecial;
 
     @Test
     void calculatesItemPrice() {
@@ -33,5 +40,14 @@ class CartItemPriceCalculatorTest {
         BigDecimal total = cartItemPriceCalculator.calculateItemPrice(cartItem);
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(price.multiply(weight)));
+    }
+
+    @Test
+    void calculatesItemPriceWithItemSpecial() {
+        inventoryItem.setItemSpecial(itemSpecial);
+
+        cartItemPriceCalculator.calculateItemPrice(cartItem);
+
+        verify(itemSpecial).calculateSpecial(cartItem);
     }
 }

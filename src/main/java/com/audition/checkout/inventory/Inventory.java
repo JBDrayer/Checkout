@@ -16,7 +16,6 @@ public class Inventory {
         return getInventoryItem(itemName);
     }
 
-
     public void markDownItem(String itemName, BigDecimal markdown) {
         InventoryItem inventoryItem = getInventoryItem(itemName);
         inventoryItem.setMarkDown(markdown);

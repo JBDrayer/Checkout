@@ -1,5 +1,6 @@
 package com.audition.checkout.cart;
 
+import com.audition.checkout.ItemSpecial;
 import com.audition.checkout.inventory.InventoryItem;
 import com.audition.checkout.utils.BigDecimalFormatter;
 
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 public class CartItem {
     private InventoryItem inventoryItem;
     private BigDecimal weight = BigDecimal.ZERO;
+    private int quantity = 1;
 
     public CartItem(InventoryItem inventoryItem) {
         this.inventoryItem = inventoryItem;
@@ -27,5 +29,13 @@ public class CartItem {
 
     void updateWeight(BigDecimal weightToAdd) {
         weight = weight.add(weightToAdd);
+    }
+
+    ItemSpecial getItemSpecial() {
+        return inventoryItem.getItemSpecial();
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }
