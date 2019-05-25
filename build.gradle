@@ -1,0 +1,22 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.5.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.audition'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0'
+	testCompile group: 'org.assertj', name: 'assertj-core', version: '3.12.2'
+	testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '2.17.0'
+}
