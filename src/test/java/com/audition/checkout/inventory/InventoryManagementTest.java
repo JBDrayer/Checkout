@@ -1,6 +1,6 @@
 package com.audition.checkout.inventory;
 
-import com.audition.checkout.ItemSpecial;
+import com.audition.checkout.special.ItemSpecial;
 import com.audition.checkout.cart.Cart;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;

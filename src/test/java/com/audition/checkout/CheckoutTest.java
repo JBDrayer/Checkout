@@ -2,6 +2,7 @@ package com.audition.checkout;
 
 import com.audition.checkout.cart.Cart;
 import com.audition.checkout.inventory.InventoryManagement;
+import com.audition.checkout.special.ItemSpecial;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.BeforeEach;

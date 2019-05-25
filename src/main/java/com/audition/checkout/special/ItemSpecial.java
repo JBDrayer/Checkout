@@ -1,4 +1,4 @@
-package com.audition.checkout;
+package com.audition.checkout.special;
 
 import com.audition.checkout.cart.CartItem;
 

@@ -1,11 +1,11 @@
-package com.audition.checkout;
+package com.audition.checkout.special;
 
 import com.audition.checkout.cart.CartItem;
 import com.audition.checkout.utils.BigDecimalFormatter;
 
 import java.math.BigDecimal;
 
-public class BuyOneGetOneSpecial implements ItemSpecial{
+public class BuyOneGetOneSpecial implements ItemSpecial {
     @Override
     public BigDecimal calculateSpecial(CartItem cartItem) {
         BigDecimal total = BigDecimal.ZERO;

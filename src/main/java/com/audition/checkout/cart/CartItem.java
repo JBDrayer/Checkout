@@ -1,6 +1,6 @@
 package com.audition.checkout.cart;
 
-import com.audition.checkout.ItemSpecial;
+import com.audition.checkout.special.ItemSpecial;
 import com.audition.checkout.inventory.InventoryItem;
 
 import java.math.BigDecimal;

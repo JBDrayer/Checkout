@@ -6,6 +6,7 @@ import com.audition.checkout.cart.CartItemPriceCalculator;
 import com.audition.checkout.inventory.Inventory;
 import com.audition.checkout.inventory.InventoryItem;
 import com.audition.checkout.inventory.InventoryManagement;
+import com.audition.checkout.special.BuyOneGetOneSpecial;
 import com.audition.checkout.utils.BigDecimalFormatter;
 import org.junit.jupiter.api.Test;
 
