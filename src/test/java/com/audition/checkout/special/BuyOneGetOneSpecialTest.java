@@ -1,7 +1,6 @@
 package com.audition.checkout.special;
 
 import com.audition.checkout.cart.CartItem;
-import com.audition.checkout.special.BuyOneGetOneSpecial;
 import com.audition.checkout.utils.BigDecimalFormatter;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
@@ -19,11 +18,11 @@ class BuyOneGetOneSpecialTest {
 
     @Mock private CartItem cartItem;
     private BigDecimal price = new BigDecimal(RandomUtils.nextInt(1,10));
-    private int quantity = 2;
 
     @Test
     void calculatesBuyOneGetOneSpecial() {
         BuyOneGetOneSpecial buyOneGetOneSpecial = new BuyOneGetOneSpecial();
+        int quantity = 2;
         when(cartItem.getQuantity()).thenReturn(quantity);
         when(cartItem.getPrice()).thenReturn(price);
 
