@@ -25,4 +25,7 @@ public class Checkout {
     public BigDecimal calculateTotal() {
         return cart.calculateTotal();
     }
+
+    public void markDownItem(String soup, BigDecimal bigDecimal) {
+    }
 }

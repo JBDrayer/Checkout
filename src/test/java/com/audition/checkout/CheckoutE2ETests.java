@@ -88,4 +88,14 @@ class CheckoutE2ETests {
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.87)));
     }
+
+    @Test
+    void calculatesTotalForItemWithMarkdown() {
+        checkout.markDownItem("soup", new BigDecimal(.20));
+        checkout.addItemToCart("soup");
+
+        BigDecimal total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.69)));
+    }
 }
