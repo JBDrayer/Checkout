@@ -16,10 +16,10 @@ import static org.mockito.Mockito.when;
 class BuyXGetYForZPercentOffSpecialTest {
     @Mock private CartItem cartItem;
     private BigDecimal price = BigDecimal.ONE;
+    private BuyXGetYForZPercentOffSpecial buyXGetYForZPercentOffSpecial = new BuyXGetYForZPercentOffSpecial(2,1,1,new BigDecimal(.5));
 
     @Test
     void calculatesBuyXGetYForZPercentOff() {
-        BuyXGetYForZPercentOffSpecial buyXGetYForZPercentOffSpecial = new BuyXGetYForZPercentOffSpecial(2,1,new BigDecimal(.5));
         when(cartItem.getPrice()).thenReturn(price);
         when(cartItem.getQuantity()).thenReturn(3);
 
@@ -30,12 +30,21 @@ class BuyXGetYForZPercentOffSpecialTest {
 
     @Test
     void calculatesTotalIfRemainingNumberOfItemsDoesNotMeetSpecial() {
-        BuyXGetYForZPercentOffSpecial buyXGetYForZPercentOffSpecial = new BuyXGetYForZPercentOffSpecial(2,1,new BigDecimal(.5));
         when(cartItem.getPrice()).thenReturn(price);
         when(cartItem.getQuantity()).thenReturn(4);
 
         BigDecimal total = buyXGetYForZPercentOffSpecial.calculateSpecial(cartItem);
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.5)));
+    }
+
+    @Test
+    void calculatesTotalWhenSpecialLimitExceeded() {
+        when(cartItem.getPrice()).thenReturn(price);
+        when(cartItem.getQuantity()).thenReturn(6);
+
+        BigDecimal total = buyXGetYForZPercentOffSpecial.calculateSpecial(cartItem);
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.5)));
     }
 }

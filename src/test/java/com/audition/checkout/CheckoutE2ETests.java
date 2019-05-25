@@ -131,8 +131,8 @@ class CheckoutE2ETests {
     }
 
     @Test
-    void calculatesTotalForBuyXGetYForZSpecial() {
-        checkout.addSpecialToInventoryItem(new BuyXGetYForZPercentOffSpecial(2,1,new BigDecimal(.5)), "soup");
+    void calculatesTotalForBuyXGetYForZPercentOffSpecial() {
+        checkout.addSpecialToInventoryItem(new BuyXGetYForZPercentOffSpecial(2,1,1,new BigDecimal(.5)), "soup");
         checkout.addItemToCart("soup");
 
         BigDecimal total = checkout.calculateTotal();
@@ -150,6 +150,24 @@ class CheckoutE2ETests {
         total = checkout.calculateTotal();
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(4.72)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(6.61)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(8.50)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.39)));
     }
 
     @Test

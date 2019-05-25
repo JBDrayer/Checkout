@@ -8,11 +8,13 @@ import java.math.BigDecimal;
 public class BuyXGetYForZPercentOffSpecial implements ItemSpecial {
     private final int quantityNeeded;
     private final int quantityDiscounted;
+    private int specialLimit;
     private final BigDecimal discountPercentage;
 
-    public BuyXGetYForZPercentOffSpecial(int quantityNeeded, int quantityDiscounted, BigDecimal discountPercentage) {
+    public BuyXGetYForZPercentOffSpecial(int quantityNeeded, int quantityDiscounted, int specialLimit, BigDecimal discountPercentage) {
         this.quantityNeeded = quantityNeeded;
         this.quantityDiscounted = quantityDiscounted;
+        this.specialLimit = specialLimit;
         this.discountPercentage = discountPercentage;
     }
 
@@ -21,11 +23,13 @@ public class BuyXGetYForZPercentOffSpecial implements ItemSpecial {
         BigDecimal total = BigDecimal.ZERO;
         BigDecimal price = cartItem.getPrice();
         int quantity = cartItem.getQuantity();
+        int specialsUsed = 0;
         for(int index = 0; index < quantity; index ++){
-            if(numberOfRequiredItemsMet(index) && (numberOfSpecialItemsMet(quantity))){
+            if(numberOfRequiredItemsMet(quantity) && (numberOfSpecialItemsMet(quantity)) && specialsUsed < specialLimit){
                 total = total.add(getTotalOfRegularPriceItems(price));
                 total = total.add(getTotalOfSpecialPriceItems(price));
                 index = moveIndexToNextNonCalculatedItem(index);
+                specialsUsed++;
             }else {
                 total = total.add(price);
             }
@@ -33,8 +37,8 @@ public class BuyXGetYForZPercentOffSpecial implements ItemSpecial {
         return BigDecimalFormatter.formatForMoney(total);
     }
 
-    private boolean numberOfRequiredItemsMet(int index) {
-        return index < quantityNeeded;
+    private boolean numberOfRequiredItemsMet(int quantity) {
+        return quantity >= quantityNeeded;
     }
 
     private boolean numberOfSpecialItemsMet(int quantity) {
@@ -42,12 +46,12 @@ public class BuyXGetYForZPercentOffSpecial implements ItemSpecial {
     }
 
     private BigDecimal getTotalOfRegularPriceItems(BigDecimal itemPrice) {
-        return itemPrice.multiply(new BigDecimal(quantityNeeded));
+        return BigDecimalFormatter.formatForMoney(itemPrice.multiply(new BigDecimal(quantityNeeded)));
     }
 
     private BigDecimal getTotalOfSpecialPriceItems(BigDecimal price) {
-        return price.multiply(new BigDecimal(quantityDiscounted)
-                .multiply(discountPercentage));
+        return BigDecimalFormatter.formatForMoney(price.multiply(new BigDecimal(quantityDiscounted)
+                .multiply(discountPercentage)));
     }
 
     private int moveIndexToNextNonCalculatedItem(int index) {
