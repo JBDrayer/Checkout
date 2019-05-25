@@ -17,6 +17,12 @@ public class Cart {
         cartItems.add(new CartItem(inventoryItem));
     }
 
+    public void addWeightedItem(InventoryItem inventoryItem, BigDecimal weight) {
+        CartItem cartItem = new CartItem(inventoryItem);
+        cartItem.setWeight(weight);
+        cartItems.add(cartItem);
+    }
+
     public BigDecimal calculateTotal() {
         BigDecimal total = BigDecimal.ZERO;
         for(CartItem cartItem : cartItems){
