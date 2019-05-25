@@ -1,5 +1,6 @@
 package com.audition.checkout.inventory;
 
+import com.audition.checkout.ItemSpecial;
 import com.audition.checkout.cart.Cart;
 
 import java.math.BigDecimal;
@@ -21,5 +22,8 @@ public class InventoryManagement {
 
     public void markDownItem(String itemName, BigDecimal markDown) {
         inventory.markDownItem(itemName, markDown);
+    }
+
+    public void addSpecialToInventoryItem(ItemSpecial itemspecial, String itemName) {
     }
 }

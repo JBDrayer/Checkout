@@ -30,6 +30,7 @@ public class Checkout {
         inventoryManagement.markDownItem(itemName, markDown);
     }
 
-    public void addSpecialToItem(BuyOneGetOneSpecial buyOneGetOneSpecial, String soup) {
+    public void addSpecialToInventoryItem(ItemSpecial itemSpecial, String itemName) {
+        inventoryManagement.addSpecialToInventoryItem(itemSpecial, itemName);
     }
 }

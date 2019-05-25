@@ -1,4 +1,4 @@
 package com.audition.checkout;
 
-public class BuyOneGetOneSpecial {
+public class BuyOneGetOneSpecial implements ItemSpecial{
 }

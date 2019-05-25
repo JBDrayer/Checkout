@@ -16,8 +16,9 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class CheckoutTest {
-    @Mock private Cart cart;
     @Mock private InventoryManagement inventoryManagement;
+    @Mock private ItemSpecial itemspecial;
+    @Mock private Cart cart;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
     private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(1,10));
     private BigDecimal markDown = new BigDecimal(RandomUtils.nextInt(1,10));
@@ -47,6 +48,14 @@ class CheckoutTest {
         checkout.markDownItem(itemName, markDown);
 
         verify(inventoryManagement).markDownItem(itemName, markDown);
+    }
+
+
+    @Test
+    void addsSpecialToInventoryItem() {
+        checkout.addSpecialToInventoryItem(itemspecial, itemName);
+
+        verify(inventoryManagement).addSpecialToInventoryItem(itemspecial, itemName);
     }
 
     @Test

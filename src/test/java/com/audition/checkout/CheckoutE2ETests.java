@@ -101,7 +101,7 @@ class CheckoutE2ETests {
 
     @Test
     void calculatesTotalForBuyOneGetOneSpecial() {
-        checkout.addSpecialToItem(new BuyOneGetOneSpecial(), "soup");
+        checkout.addSpecialToInventoryItem(new BuyOneGetOneSpecial(), "soup");
         checkout.addItemToCart("soup");
 
         BigDecimal total = checkout.calculateTotal();
