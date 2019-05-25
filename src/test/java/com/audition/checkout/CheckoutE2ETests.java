@@ -232,6 +232,21 @@ class CheckoutE2ETests {
     }
 
     @Test
+    void removingAWeightedItemFromCartRemovesItemWeightedPriceFromTotal() {
+        checkout.addWeightedItemToCart("ground beef", new BigDecimal(1.5));
+
+        BigDecimal total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(8.98)));
+
+        checkout.removeWeightedItemFromCart("ground beef", new BigDecimal(.5));
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.99)));
+    }
+
+    @Test
     void calculatesTotalForRemovedItemThatInvalidatesSpecial() {
         checkout.addSpecialToInventoryItem(new BuyXForYSpecial(3,new BigDecimal(5), 1), "soup");
         checkout.addItemToCart("soup");

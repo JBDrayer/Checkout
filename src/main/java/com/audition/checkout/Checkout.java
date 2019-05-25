@@ -38,4 +38,7 @@ public class Checkout {
     public BigDecimal calculateTotal() {
         return cart.calculateTotal();
     }
+
+    public void removeWeightedItemFromCart(String ground_beef, BigDecimal bigDecimal) {
+    }
 }
