@@ -104,7 +104,7 @@ class CheckoutE2ETests {
 
     @Test
     void calculatesTotalForBuyOneGetOneSpecial() {
-        checkout.addSpecialToInventoryItem(new BuyOneGetOneSpecial(), "soup");
+        checkout.addSpecialToInventoryItem(new BuyOneGetOneSpecial(1), "soup");
         checkout.addItemToCart("soup");
 
         BigDecimal total = checkout.calculateTotal();
@@ -116,6 +116,18 @@ class CheckoutE2ETests {
         total = checkout.calculateTotal();
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
+
+        checkout.addItemToCart("soup");
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.67)));
     }
 
     @Test

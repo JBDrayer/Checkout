@@ -18,10 +18,11 @@ class BuyOneGetOneSpecialTest {
 
     @Mock private CartItem cartItem;
     private BigDecimal price = new BigDecimal(RandomUtils.nextInt(1,10));
+    private int specialLimit = 1;
 
     @Test
     void calculatesBuyOneGetOneSpecial() {
-        BuyOneGetOneSpecial buyOneGetOneSpecial = new BuyOneGetOneSpecial();
+        BuyOneGetOneSpecial buyOneGetOneSpecial = new BuyOneGetOneSpecial(specialLimit);
         int quantity = 2;
         when(cartItem.getQuantity()).thenReturn(quantity);
         when(cartItem.getPrice()).thenReturn(price);
