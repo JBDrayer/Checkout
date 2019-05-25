@@ -18,7 +18,7 @@ class BuyXForYSpecialTest {
 
     @Test
     void calculatesBuyXForYSpecial() {
-        BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00));
+        BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00), 1);
         when(cartItem.getQuantity()).thenReturn(3);
         when(cartItem.getPrice()).thenReturn(new BigDecimal(2));
 
@@ -29,7 +29,7 @@ class BuyXForYSpecialTest {
 
     @Test
     void calculatesRemainingItemsAfterSpecial() {
-        BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00));
+        BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00), 1);
         when(cartItem.getQuantity()).thenReturn(5);
         when(cartItem.getPrice()).thenReturn(new BigDecimal(2));
         BigDecimal total = buyXForYSpecial.calculateSpecial(cartItem);

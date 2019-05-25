@@ -9,7 +9,7 @@ public class BuyXForYSpecial implements ItemSpecial {
     private int quantityNeeded;
     private BigDecimal specialPrice;
 
-    public BuyXForYSpecial(int quantityNeeded, BigDecimal specialPrice) {
+    public BuyXForYSpecial(int quantityNeeded, BigDecimal specialPrice, int specialLimit) {
         this.quantityNeeded = quantityNeeded;
         this.specialPrice = specialPrice;
     }
