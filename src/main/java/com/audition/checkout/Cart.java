@@ -19,6 +19,6 @@ public class Cart {
         for(CartItem cartItem : cartItems){
             total = total.add(cartItem.getPrice());
         }
-        return total;
+        return BigDecimalFormatter.formatForMoney(total);
     }
 }

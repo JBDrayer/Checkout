@@ -24,6 +24,6 @@ class CheckoutE2ETests {
 
         BigDecimal total = checkout.calculateTotal();
 
-        assertThat(total).isEqualTo(new BigDecimal(1.89).setScale(2, RoundingMode.HALF_EVEN));
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
     }
 }
