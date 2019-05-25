@@ -18,7 +18,7 @@ public class CartItem {
     }
 
     public BigDecimal getPrice() {
-        return BigDecimalFormatter.formatForMoney(inventoryItem.getPrice());
+        return inventoryItem.getPrice();
     }
 
     public BigDecimal getWeight() {

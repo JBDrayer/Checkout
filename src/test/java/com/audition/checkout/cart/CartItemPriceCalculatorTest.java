@@ -1,6 +1,7 @@
 package com.audition.checkout.cart;
 
 import com.audition.checkout.inventory.InventoryItem;
+import com.audition.checkout.utils.BigDecimalFormatter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class CartItemPriceCalculatorTest {
     void calculatesItemPrice() {
         BigDecimal total = cartItemPriceCalculator.calculateItemPrice(cartItem);
 
-        assertThat(total).isEqualTo(price);
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(price));
     }
 
     @Test
@@ -31,6 +32,6 @@ class CartItemPriceCalculatorTest {
 
         BigDecimal total = cartItemPriceCalculator.calculateItemPrice(cartItem);
 
-        assertThat(total).isEqualTo(price.multiply(weight));
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(price.multiply(weight)));
     }
 }
