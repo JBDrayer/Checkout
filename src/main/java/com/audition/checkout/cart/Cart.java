@@ -17,7 +17,13 @@ public class Cart {
     }
 
     public void addItem(InventoryItem inventoryItem) {
-        cartItems.add(new CartItem(inventoryItem));
+        Optional<CartItem> optionalCartItem = getItemFromCart(inventoryItem);
+        if (optionalCartItem.isPresent()) {
+            CartItem cartItem = cartItems.get(cartItems.indexOf(optionalCartItem.get()));
+            cartItem.updateQuantity();
+        } else{
+            cartItems.add(new CartItem(inventoryItem));
+        }
     }
 
     public void addWeightedItem(InventoryItem inventoryItem, BigDecimal weight) {

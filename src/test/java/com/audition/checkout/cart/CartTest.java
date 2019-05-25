@@ -43,6 +43,17 @@ class CartTest {
     }
 
     @Test
+    void updatesQuantityIfItemAlreadyInCart() {
+        cart.addItem(inventoryItem);
+        cart.addItem(inventoryItem);
+
+        assertThat(cartItems.size()).isEqualTo(1);
+        assertThat(cartItems.get(0).getName()).isEqualTo(itemName);
+        assertThat(cartItems.get(0).getQuantity()).isEqualTo(2);
+
+    }
+
+    @Test
     void calculatesTotalForItemsInCart() {
         cart = new Cart(Collections.singletonList(cartItem), cartItemPriceCalculator);
         BigDecimal total = new BigDecimal(RandomUtils.nextInt(1,10));

@@ -38,4 +38,8 @@ public class CartItem {
     public int getQuantity() {
         return quantity;
     }
+
+    void updateQuantity() {
+        quantity++;
+    }
 }
