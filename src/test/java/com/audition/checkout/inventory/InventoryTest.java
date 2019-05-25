@@ -1,8 +1,5 @@
 package com.audition.checkout.inventory;
 
-import com.audition.checkout.inventory.Inventory;
-import com.audition.checkout.inventory.InventoryItem;
-import com.audition.checkout.inventory.InventoryItemNotFoundException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

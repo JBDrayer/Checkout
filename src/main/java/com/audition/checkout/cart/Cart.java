@@ -1,7 +1,7 @@
 package com.audition.checkout.cart;
 
-import com.audition.checkout.utils.BigDecimalFormatter;
 import com.audition.checkout.inventory.InventoryItem;
+import com.audition.checkout.utils.BigDecimalFormatter;
 
 import java.math.BigDecimal;
 import java.util.List;

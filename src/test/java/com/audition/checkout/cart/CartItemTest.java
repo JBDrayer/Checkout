@@ -1,6 +1,5 @@
 package com.audition.checkout.cart;
 
-import com.audition.checkout.cart.CartItem;
 import com.audition.checkout.inventory.InventoryItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
