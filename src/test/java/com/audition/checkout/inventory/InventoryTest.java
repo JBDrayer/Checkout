@@ -1,6 +1,8 @@
 package com.audition.checkout.inventory;
 
+import com.audition.checkout.utils.BigDecimalFormatter;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +19,9 @@ class InventoryTest {
 
     private ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
-    private InventoryItem inventoryItem = new InventoryItem(itemName, BigDecimal.ZERO);
+    private BigDecimal itemPrice = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal markDown = new BigDecimal(RandomUtils.nextInt(1,10));
+    private InventoryItem inventoryItem = new InventoryItem(itemName, itemPrice);
     private Inventory inventory;
 
     @BeforeEach
@@ -35,5 +39,12 @@ class InventoryTest {
     @Test
     void throwsExceptionWhenItemNotFoundInInventory() {
         assertThrows(InventoryItemNotFoundException.class, () -> inventory.getItem(""));
+    }
+
+    @Test
+    void setMarkDownPriceForInventoryItem() {
+        inventory.markDownItem(itemName, markDown);
+
+        assertThat(inventoryItem.getPrice()).isEqualTo(BigDecimalFormatter.formatForMoney(itemPrice.subtract(markDown)));
     }
 }
