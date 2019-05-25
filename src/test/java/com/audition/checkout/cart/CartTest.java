@@ -12,14 +12,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CartTest {
+    @Mock private CartItemPriceCalculator cartItemPriceCalculator;
     @Mock private InventoryItem inventoryItem;
     @Mock private CartItem cartItem;
     private List<CartItem> cartItems = new ArrayList<>();
@@ -29,7 +31,7 @@ class CartTest {
 
     @BeforeEach
     void configureCart() {
-        cart = new Cart(cartItems);
+        cart = new Cart(cartItems, cartItemPriceCalculator);
     }
 
     @Test
@@ -44,12 +46,13 @@ class CartTest {
 
     @Test
     void calculatesTotalForItemsInCart() {
-        cart = new Cart(Arrays.asList(cartItem, cartItem));
-        when(cartItem.getPrice()).thenReturn(BigDecimal.ONE);
+        cart = new Cart(Collections.singletonList(cartItem), cartItemPriceCalculator);
+        BigDecimal total = new BigDecimal(RandomUtils.nextInt(1,10));
+        when(cartItemPriceCalculator.calculateItemPrice(cartItem)).thenReturn(total);
 
-        BigDecimal total = cart.calculateTotal();
+        BigDecimal results = cart.calculateTotal();
 
-        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(2)));
+        assertThat(results).isEqualTo(BigDecimalFormatter.formatForMoney(total));
     }
 
     @Test

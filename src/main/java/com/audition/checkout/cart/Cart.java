@@ -8,9 +8,11 @@ import java.util.List;
 
 public class Cart {
     private List<CartItem> cartItems;
+    private CartItemPriceCalculator cartItemPriceCalculator;
 
-    public Cart(List<CartItem> cartItems) {
+    public Cart(List<CartItem> cartItems, CartItemPriceCalculator cartItemPriceCalculator) {
         this.cartItems = cartItems;
+        this.cartItemPriceCalculator = cartItemPriceCalculator;
     }
 
     public void addItem(InventoryItem inventoryItem) {
@@ -26,7 +28,7 @@ public class Cart {
     public BigDecimal calculateTotal() {
         BigDecimal total = BigDecimal.ZERO;
         for(CartItem cartItem : cartItems){
-            total = total.add(cartItem.getPrice());
+            total = total.add(cartItemPriceCalculator.calculateItemPrice(cartItem));
         }
         return BigDecimalFormatter.formatForMoney(total);
     }
