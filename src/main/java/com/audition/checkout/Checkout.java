@@ -29,4 +29,7 @@ public class Checkout {
     public void markDownItem(String itemName, BigDecimal markDown) {
         inventoryManagement.markDownItem(itemName, markDown);
     }
+
+    public void addSpecialToItem(BuyOneGetOneSpecial buyOneGetOneSpecial, String soup) {
+    }
 }
