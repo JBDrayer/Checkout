@@ -4,13 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CheckoutE2ETests {
-    private Cart cart = new Cart();
+    private ArrayList<CartItem> cartItems = new ArrayList<>();
+    private Cart cart = new Cart(cartItems);
     private List<InventoryItem> inventoryItems = Collections.singletonList(new InventoryItem("soup"));
     private Inventory inventory = new Inventory(inventoryItems);
     private InventoryManagement inventoryManagement = new InventoryManagement(inventory);
