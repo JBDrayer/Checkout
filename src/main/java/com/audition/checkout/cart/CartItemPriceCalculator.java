@@ -12,8 +12,11 @@ public class CartItemPriceCalculator {
            return itemSpecial.calculateSpecial(cartItem);
         } else {
             return cartItem.getWeight().compareTo(BigDecimal.ZERO) > 0 ?
-                    BigDecimalFormatter.formatForMoney(cartItem.getPrice().multiply(cartItem.getWeight())) :
-                    BigDecimalFormatter.formatForMoney(cartItem.getPrice());
+                    BigDecimalFormatter.formatForMoney(cartItem.getPrice()
+                            .multiply(new BigDecimal(cartItem.getQuantity()))
+                            .multiply(cartItem.getWeight())) :
+                    BigDecimalFormatter.formatForMoney(cartItem.getPrice())
+                            .multiply(new BigDecimal(cartItem.getQuantity()));
         }
     }
 }
