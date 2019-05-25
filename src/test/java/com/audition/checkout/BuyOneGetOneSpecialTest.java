@@ -1,7 +1,6 @@
 package com.audition.checkout;
 
 import com.audition.checkout.cart.CartItem;
-import com.audition.checkout.inventory.InventoryItem;
 import com.audition.checkout.utils.BigDecimalFormatter;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
