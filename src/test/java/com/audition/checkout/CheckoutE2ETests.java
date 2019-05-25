@@ -9,7 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CheckoutE2ETests {
     private Cart cart = new Cart();
-    private InventoryManagement inventoryManagement = new InventoryManagement();
+    private Inventory inventory = new Inventory();
+    private InventoryManagement inventoryManagement = new InventoryManagement(inventory);
     private Checkout checkout = new Checkout(cart, inventoryManagement);
     @Test
     void calculatesTotalForItem() {
