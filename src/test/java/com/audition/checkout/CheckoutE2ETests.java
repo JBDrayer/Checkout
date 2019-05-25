@@ -49,7 +49,7 @@ class CheckoutE2ETests {
 
     @Test
     void calculatesTotalForWeightedItem() {
-        checkout.addItemToCart("ground beef");
+        checkout.addWeightedItemToCart("ground beef", BigDecimal.ONE);
 
         BigDecimal total = checkout.calculateTotal();
 

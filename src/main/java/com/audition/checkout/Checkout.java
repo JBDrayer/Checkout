@@ -21,4 +21,7 @@ public class Checkout {
     public BigDecimal calculateTotal() {
         return cart.calculateTotal();
     }
+
+    public void addWeightedItemToCart(String itemName, BigDecimal weight) {
+    }
 }
