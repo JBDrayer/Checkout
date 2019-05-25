@@ -18,4 +18,8 @@ public class InventoryManagement {
     public void addWeightedItemToCart(String itemName, BigDecimal weight, Cart cart) {
         cart.addWeightedItem(inventory.getItem(itemName), weight);
     }
+
+    public void markDownItem(String itemName, BigDecimal markDown) {
+        inventory.markDownItem(itemName, markDown);
+    }
 }

@@ -22,6 +22,7 @@ class InventoryManagementTest {
     @Mock private Cart cart;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
     private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal markdown = new BigDecimal(RandomUtils.nextInt(1,10));
     private InventoryManagement inventoryManagement;
 
     @BeforeEach
@@ -45,6 +46,12 @@ class InventoryManagementTest {
         inventoryManagement.addWeightedItemToCart(itemName, weight, cart);
 
         verify(cart).addWeightedItem(inventoryItem, weight);
+    }
 
+    @Test
+    void addsMarkDownToInventoryItem() {
+        inventoryManagement.markDownItem(itemName, markdown);
+
+        verify(inventory).markDownItem(itemName, markdown);
     }
 }
