@@ -39,7 +39,7 @@ class CartTest {
 
         BigDecimal total = cart.calculateTotal();
 
-        assertThat(total).isEqualTo(new BigDecimal(2));
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(2)));
 
     }
 }
