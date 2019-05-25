@@ -73,4 +73,19 @@ class CheckoutE2ETests {
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(17.97)));
     }
+
+    @Test
+    void calculatesTotalForWeightedAndNonWeightedItem() {
+        checkout.addItemToCart("soup");
+
+        BigDecimal total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
+
+        checkout.addWeightedItemToCart("ground beef", new BigDecimal(1.5));
+
+        total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.87)));
+    }
 }
