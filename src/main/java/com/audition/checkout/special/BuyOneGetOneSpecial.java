@@ -16,9 +16,16 @@ public class BuyOneGetOneSpecial implements ItemSpecial {
     public BigDecimal calculateSpecial(CartItem cartItem) {
         BigDecimal total = BigDecimal.ZERO;
         BigDecimal price = cartItem.getPrice();
-        for(int index = 0; index < cartItem.getQuantity(); index++){
+        int quantity = cartItem.getQuantity();
+        int specialsUsed = 0;
+        for(int index = 0; index < quantity; index++){
+            if (specialsUsed < specialLimit){
                 total = total.add(price);
+                specialsUsed++;
                 index++;
+            } else{
+                total = total.add(price);
+            }
         }
         return BigDecimalFormatter.formatForMoney(total);
     }
