@@ -9,6 +9,7 @@ import com.audition.checkout.inventory.InventoryManagement;
 import com.audition.checkout.special.BuyOneGetOneSpecial;
 import com.audition.checkout.special.BuyXForYSpecial;
 import com.audition.checkout.special.BuyXGetYForZPercentOffSpecial;
+import com.audition.checkout.special.BuyXWeightGetYForZPercentOff;
 import com.audition.checkout.utils.BigDecimalFormatter;
 import org.junit.jupiter.api.Test;
 
@@ -208,6 +209,16 @@ class CheckoutE2ETests {
         total = checkout.calculateTotal();
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.67)));
+    }
+
+    @Test
+    void calculatesTotalForBuyXWeightGetYForZPercentOff() {
+        checkout.addSpecialToInventoryItem(new BuyXWeightGetYForZPercentOff(BigDecimal.ONE, BigDecimal.ONE, new BigDecimal(2), new BigDecimal(.5)), "ground beef");
+        checkout.addWeightedItemToCart("ground beef", new BigDecimal(3));
+
+        BigDecimal total = checkout.calculateTotal();
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(14.98)));
     }
 
     @Test
