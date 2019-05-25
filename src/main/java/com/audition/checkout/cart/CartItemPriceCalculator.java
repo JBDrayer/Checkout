@@ -4,6 +4,6 @@ import java.math.BigDecimal;
 
 public class CartItemPriceCalculator {
     public BigDecimal calculateItemPrice(CartItem cartItem) {
-        return null;
+        return cartItem.getPrice();
     }
 }
