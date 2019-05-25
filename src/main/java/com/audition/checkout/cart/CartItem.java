@@ -38,7 +38,11 @@ public class CartItem {
         return quantity;
     }
 
-    void updateQuantity() {
+    void incrementQuantity() {
         quantity++;
+    }
+
+    void decrementQuantity() {
+        quantity--;
     }
 }

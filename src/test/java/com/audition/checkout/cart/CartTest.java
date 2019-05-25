@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,6 +42,35 @@ class CartTest {
         assertThat(cartItems).isNotEmpty();
         assertThat(cartItems.get(0).getName()).isEqualTo(itemName);
     }
+
+    @Test
+    void removesItemFromCartWhenQuantityIsOne() {
+        cartItems.add(cartItem);
+        cart = new Cart(cartItems, cartItemPriceCalculator);
+
+        cart.removeItem(cartItem.getName());
+
+        assertThat(cartItems).isEmpty();
+    }
+
+    @Test
+    void decrementsItemQuantityWhenRemovingItemFromCartAndQuantityIsGreaterThanOne() {
+        cartItem.incrementQuantity();
+        cartItems.add(cartItem);
+        cart = new Cart(cartItems, cartItemPriceCalculator);
+
+        cart.removeItem(cartItem.getName());
+
+        assertThat(cartItems.size()).isEqualTo(1);
+        assertThat(cartItems.get(0)).isEqualTo(cartItem);
+        assertThat(cartItems.get(0).getQuantity()).isEqualTo(1);
+    }
+
+    @Test
+    void throwsExceptionWhenItemToRemoveNotFoundInCart() {
+        assertThrows(CartItemNotFoundException.class, () -> cart.removeItem(itemName));
+    }
+
 
     @Test
     void updatesQuantityIfItemAlreadyInCart() {

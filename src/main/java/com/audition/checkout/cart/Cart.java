@@ -17,40 +17,51 @@ public class Cart {
     }
 
     public void addItem(InventoryItem inventoryItem) {
-        Optional<CartItem> optionalCartItem = getItemFromCart(inventoryItem);
+        Optional<CartItem> optionalCartItem = getItemFromCart(inventoryItem.getName());
         if (optionalCartItem.isPresent()) {
             CartItem cartItem = cartItems.get(cartItems.indexOf(optionalCartItem.get()));
-            cartItem.updateQuantity();
-        } else{
+            cartItem.incrementQuantity();
+        } else {
             cartItems.add(new CartItem(inventoryItem));
         }
     }
 
     public void removeItem(String itemName) {
+        Optional<CartItem> optionalCartItem = getItemFromCart(itemName);
+        if (optionalCartItem.isPresent()) {
+            CartItem cartItem = optionalCartItem.get();
+            if (cartItem.getQuantity() > 1) {
+                cartItem.decrementQuantity();
+            } else {
+                cartItems.remove(optionalCartItem.get());
+            }
+        } else {
+            throw new CartItemNotFoundException(itemName + " not found in cart");
+        }
     }
 
     public void addWeightedItem(InventoryItem inventoryItem, BigDecimal weight) {
-        Optional<CartItem> optionalCartItem  = getItemFromCart(inventoryItem);
-        if(optionalCartItem.isPresent()){
+        Optional<CartItem> optionalCartItem = getItemFromCart(inventoryItem.getName());
+        if (optionalCartItem.isPresent()) {
             CartItem cartItem = optionalCartItem.get();
             cartItem.updateWeight(weight);
-        }else {
+        } else {
             CartItem cartItem = new CartItem(inventoryItem);
             cartItem.updateWeight(weight);
             cartItems.add(cartItem);
         }
     }
 
-    private Optional<CartItem> getItemFromCart(InventoryItem inventoryItem) {
+    private Optional<CartItem> getItemFromCart(String itemName) {
         return cartItems.stream().filter(cartItem ->
                 cartItem.getName()
-                .equalsIgnoreCase(inventoryItem.getName()))
+                        .equalsIgnoreCase(itemName))
                 .findFirst();
     }
 
     public BigDecimal calculateTotal() {
         BigDecimal total = BigDecimal.ZERO;
-        for(CartItem cartItem : cartItems){
+        for (CartItem cartItem : cartItems) {
             total = total.add(cartItemPriceCalculator.calculateItemPrice(cartItem));
         }
         return BigDecimalFormatter.formatForMoney(total);
