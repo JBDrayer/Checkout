@@ -15,6 +15,6 @@ public class CartItem {
     }
 
     public BigDecimal getPrice() {
-        return null;
+        return inventoryItem.getPrice();
     }
 }

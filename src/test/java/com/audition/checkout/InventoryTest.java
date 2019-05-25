@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +19,7 @@ class InventoryTest {
 
     private ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
-    private InventoryItem inventoryItem = new InventoryItem(itemName);
+    private InventoryItem inventoryItem = new InventoryItem(itemName, BigDecimal.ZERO);
     private Inventory inventory;
 
     @BeforeEach
