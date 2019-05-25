@@ -3,6 +3,8 @@ package com.audition.checkout.inventory;
 import com.audition.checkout.cart.Cart;
 import com.audition.checkout.inventory.Inventory;
 
+import java.math.BigDecimal;
+
 public class InventoryManagement {
     private Inventory inventory;
 
@@ -12,5 +14,9 @@ public class InventoryManagement {
 
     public void addItemToCart(String itemName, Cart cart) {
         cart.addItem(inventory.getItem(itemName));
+    }
+
+    public void addWeightedItemToCart(String itemName, BigDecimal weight, Cart cart) {
+        cart.addWeightedItem(inventory.getItem(itemName), weight);
     }
 }
