@@ -26,6 +26,9 @@ public class Cart {
         }
     }
 
+    public void removeItem(String itemName) {
+    }
+
     public void addWeightedItem(InventoryItem inventoryItem, BigDecimal weight) {
         Optional<CartItem> optionalCartItem  = getItemFromCart(inventoryItem);
         if(optionalCartItem.isPresent()){

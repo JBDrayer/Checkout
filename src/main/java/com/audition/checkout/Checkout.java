@@ -19,12 +19,12 @@ public class Checkout {
         inventoryManagement.addItemToCart(itemName, cart);
     }
 
-    public void addWeightedItemToCart(String itemName, BigDecimal weight) {
-        inventoryManagement.addWeightedItemToCart(itemName, weight, cart);
+    public void removeItemFromCart(String itemName) {
+        cart.removeItem(itemName);
     }
 
-    public BigDecimal calculateTotal() {
-        return cart.calculateTotal();
+    public void addWeightedItemToCart(String itemName, BigDecimal weight) {
+        inventoryManagement.addWeightedItemToCart(itemName, weight, cart);
     }
 
     public void markDownItem(String itemName, BigDecimal markDown) {
@@ -35,6 +35,7 @@ public class Checkout {
         inventoryManagement.addSpecialToInventoryItem(itemSpecial, itemName);
     }
 
-    public void removeItemFromCart(String soup) {
+    public BigDecimal calculateTotal() {
+        return cart.calculateTotal();
     }
 }

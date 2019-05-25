@@ -38,6 +38,13 @@ class CheckoutTest {
     }
 
     @Test
+    void removesItemFromCart() {
+        checkout.removeItemFromCart(itemName);
+
+        verify(cart).removeItem(itemName);
+    }
+
+    @Test
     void addsWeightedItemToCart() {
         checkout.addWeightedItemToCart(itemName, weight);
 
@@ -50,7 +57,6 @@ class CheckoutTest {
 
         verify(inventoryManagement).markDownItem(itemName, markDown);
     }
-
 
     @Test
     void addsSpecialToInventoryItem() {
