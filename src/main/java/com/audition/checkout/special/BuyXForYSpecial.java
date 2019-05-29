@@ -23,7 +23,7 @@ public class BuyXForYSpecial implements ItemSpecial {
         int numberOfQualifyingSpecials = quantity / quantityNeeded;
         int specialsUsed = 0;
         for (int index = 0; index < numberOfQualifyingSpecials; index++) {
-            if(specialsUsed < specialLimit) {
+            if((specialLimit == 0) || (specialsUsed < specialLimit)) {
                 total = total.add(specialPrice);
                 quantity -= quantityNeeded;
                 specialsUsed++;

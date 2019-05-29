@@ -46,4 +46,15 @@ class BuyXForYSpecialTest {
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(11)));
     }
+
+    @Test
+    void calculatesTotalWhenNoSpecialLimitIsSet() {
+        BuyXForYSpecial buyXForYSpecial = new BuyXForYSpecial(3, new BigDecimal(5.00), 0);
+        when(cartItem.getQuantity()).thenReturn(6);
+        when(cartItem.getPrice()).thenReturn(new BigDecimal(2));
+
+        BigDecimal total = buyXForYSpecial.calculateSpecial(cartItem);
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10)));
+    }
 }
