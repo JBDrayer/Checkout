@@ -1,9 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.5.RELEASE'
 	id 'java'
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.audition'
 version = '0.0.1-SNAPSHOT'
