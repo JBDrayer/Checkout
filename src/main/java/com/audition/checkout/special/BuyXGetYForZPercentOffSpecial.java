@@ -25,7 +25,7 @@ public class BuyXGetYForZPercentOffSpecial implements ItemSpecial {
         int quantity = cartItem.getQuantity();
         int specialsUsed = 0;
         for(int index = 0; index < quantity; index ++){
-            if((numberOfSpecialItemsMet(quantity)) && (specialsUsed < specialLimit)){
+            if((specialLimit == 0) ||((numberOfSpecialItemsMet(quantity)) && (specialsUsed < specialLimit))){
                 total = total.add(getTotalOfRegularPriceItems(price));
                 total = total.add(getTotalOfSpecialPriceItems(price));
                 index = moveIndexToNextNonCalculatedItem(index);
