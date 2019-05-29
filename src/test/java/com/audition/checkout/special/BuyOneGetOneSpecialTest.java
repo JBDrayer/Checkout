@@ -55,4 +55,17 @@ class BuyOneGetOneSpecialTest {
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(price.multiply(new BigDecimal(3))));
     }
+
+    @Test
+    void calculatesSpecialWhenNoLimitIsSet() {
+        specialLimit = 0;
+        BuyOneGetOneSpecial buyOneGetOneSpecial = new BuyOneGetOneSpecial(specialLimit);
+        int quantity = 6;
+        when(cartItem.getQuantity()).thenReturn(quantity);
+        when(cartItem.getPrice()).thenReturn(price);
+
+        BigDecimal total = buyOneGetOneSpecial.calculateSpecial(cartItem);
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(price.multiply(new BigDecimal(3))));
+    }
 }

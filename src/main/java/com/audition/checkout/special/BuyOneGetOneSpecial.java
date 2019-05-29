@@ -19,7 +19,7 @@ public class BuyOneGetOneSpecial implements ItemSpecial {
         int quantity = cartItem.getQuantity();
         int specialsUsed = 0;
         for(int index = 0; index < quantity; index++){
-            if (specialsUsed < specialLimit){
+            if ((specialLimit == 0) || (specialsUsed < specialLimit)){
                 total = total.add(price);
                 specialsUsed++;
                 index++;
