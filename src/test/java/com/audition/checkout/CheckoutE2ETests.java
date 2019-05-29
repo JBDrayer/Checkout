@@ -30,6 +30,16 @@ class CheckoutE2ETests {
     private InventoryManagement inventoryManagement = new InventoryManagement(inventory);
     private Checkout checkout = new Checkout(cart, inventoryManagement);
 
+
+    @Test
+    void canAdjustPriceOfItemInInventory() {
+        assertThat(inventory.getItem("soup").getPrice()).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
+
+        checkout.adjustDefaultItemPrice("soup",new BigDecimal(1.59));
+
+        assertThat(inventory.getItem("soup").getPrice()).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.59)));
+    }
+
     @Test
     void calculatesTotalForItem() {
         checkout.addItemToCart("soup");
