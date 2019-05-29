@@ -24,9 +24,9 @@ public class BuyXWeightGetYForZPercentOff implements ItemSpecial {
         BigDecimal price = cartItem.getPrice();
         BigDecimal remainingItemWeight = cartItem.getWeight();
         BigDecimal specialWeightUsed = BigDecimal.ZERO;
-        int numberOfQualifyingSpecials = remainingItemWeight.divide(weightNeeded, BigDecimal.ROUND_DOWN).intValue();
+        int numberOfQualifyingSpecials = remainingItemWeight.divide(weightNeeded.add(weightDiscounted), BigDecimal.ROUND_DOWN).intValue();
         for (int i = 0; i < numberOfQualifyingSpecials; i++) {
-            if (isEnoughWeightForSpecial(remainingItemWeight) && isEnoughSpecialsRemaining(specialWeightUsed)) {
+            if ((isNoSpecialLimit()) || (isEnoughWeightForSpecial(remainingItemWeight) && isEnoughSpecialsRemaining(specialWeightUsed))) {
                 total = total.add(price.multiply(weightNeeded));
                 total = total.add(price.multiply(weightDiscounted.multiply(percentDiscounted)));
                 remainingItemWeight = remainingItemWeight.subtract(weightNeeded).subtract(weightDiscounted);
@@ -35,6 +35,10 @@ public class BuyXWeightGetYForZPercentOff implements ItemSpecial {
         }
         total = total.add(price.multiply(remainingItemWeight));
         return BigDecimalFormatter.formatForMoney(total);
+    }
+
+    private boolean isNoSpecialLimit() {
+        return specialLimit.equals(BigDecimal.ZERO);
     }
 
     private boolean isEnoughSpecialsRemaining(BigDecimal specialWeightUsed) {

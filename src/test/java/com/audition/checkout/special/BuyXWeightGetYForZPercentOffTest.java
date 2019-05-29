@@ -37,4 +37,15 @@ class BuyXWeightGetYForZPercentOffTest {
 
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.5)));
     }
+
+    @Test
+    void calculatesTotalWhenSpecialLimitIsNotSet() {
+        BuyXWeightGetYForZPercentOff buyXWeightGetYForZPercentOff = new BuyXWeightGetYForZPercentOff(BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ZERO, new BigDecimal(.5));
+        when(cartItem.getPrice()).thenReturn(BigDecimal.ONE);
+        when(cartItem.getWeight()).thenReturn(new BigDecimal(4));
+
+        BigDecimal total = buyXWeightGetYForZPercentOff.calculateSpecial(cartItem);
+
+        assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3)));
+    }
 }
