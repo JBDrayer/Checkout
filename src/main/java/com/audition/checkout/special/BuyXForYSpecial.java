@@ -21,16 +21,15 @@ public class BuyXForYSpecial implements ItemSpecial {
         BigDecimal total = BigDecimal.ZERO;
         int quantity = cartItem.getQuantity();
         int numberOfQualifyingSpecials = quantity / quantityNeeded;
-        int numberOfItemsRemaining = quantity;
         int specialsUsed = 0;
         for (int index = 0; index < numberOfQualifyingSpecials; index++) {
             if(specialsUsed < specialLimit) {
                 total = total.add(specialPrice);
-                numberOfItemsRemaining -= quantityNeeded;
+                quantity -= quantityNeeded;
                 specialsUsed++;
             }
         }
-        total = total.add(cartItem.getPrice().multiply(new BigDecimal(numberOfItemsRemaining)));
+        total = total.add(cartItem.getPrice().multiply(new BigDecimal(quantity)));
         return BigDecimalFormatter.formatForMoney(total);
     }
 }

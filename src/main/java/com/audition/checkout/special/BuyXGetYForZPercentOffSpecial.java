@@ -25,7 +25,7 @@ public class BuyXGetYForZPercentOffSpecial implements ItemSpecial {
         int quantity = cartItem.getQuantity();
         int specialsUsed = 0;
         for(int index = 0; index < quantity; index ++){
-            if(numberOfRequiredItemsMet(quantity) && (numberOfSpecialItemsMet(quantity)) && specialsUsed < specialLimit){
+            if((numberOfSpecialItemsMet(quantity)) && (specialsUsed < specialLimit)){
                 total = total.add(getTotalOfRegularPriceItems(price));
                 total = total.add(getTotalOfSpecialPriceItems(price));
                 index = moveIndexToNextNonCalculatedItem(index);
@@ -36,11 +36,6 @@ public class BuyXGetYForZPercentOffSpecial implements ItemSpecial {
         }
         return BigDecimalFormatter.formatForMoney(total);
     }
-
-    private boolean numberOfRequiredItemsMet(int quantity) {
-        return quantity >= quantityNeeded;
-    }
-
     private boolean numberOfSpecialItemsMet(int quantity) {
         return quantity - quantityNeeded >= quantityDiscounted;
     }
