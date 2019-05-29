@@ -42,15 +42,11 @@ class CheckoutE2ETests {
     @Test
     void calculatesTotalForMultipleItems() {
         checkout.addItemToCart("soup");
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
     }
 
@@ -66,30 +62,22 @@ class CheckoutE2ETests {
     @Test
     void calculatesTotalForMultipleWeightedItems() {
         checkout.addWeightedItemToCart("ground beef", new BigDecimal(1.5));
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(8.98)));
 
         checkout.addWeightedItemToCart("ground beef", new BigDecimal(1.5));
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(17.97)));
     }
 
     @Test
     void calculatesTotalForWeightedAndNonWeightedItem() {
         checkout.addItemToCart("soup");
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addWeightedItemToCart("ground beef", new BigDecimal(1.5));
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.87)));
     }
 
@@ -107,27 +95,19 @@ class CheckoutE2ETests {
     void calculatesTotalForBuyOneGetOneSpecial() {
         checkout.addSpecialToInventoryItem(new BuyOneGetOneSpecial(1), "soup");
         checkout.addItemToCart("soup");
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.67)));
     }
 
@@ -135,39 +115,27 @@ class CheckoutE2ETests {
     void calculatesTotalForBuyXGetYForZPercentOffSpecial() {
         checkout.addSpecialToInventoryItem(new BuyXGetYForZPercentOffSpecial(2,1,1,new BigDecimal(.5)), "soup");
         checkout.addItemToCart("soup");
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(4.72)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(6.61)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(8.50)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.39)));
     }
 
@@ -175,39 +143,27 @@ class CheckoutE2ETests {
     void calculatesTotalForBuyXForYSpecial() {
         checkout.addSpecialToInventoryItem(new BuyXForYSpecial(3,new BigDecimal(5), 1), "soup");
         checkout.addItemToCart("soup");
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.00)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(6.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(8.78)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(10.67)));
     }
 
@@ -224,36 +180,26 @@ class CheckoutE2ETests {
     @Test
     void removingAnItemFromCartRemovesItemPriceFromTotal() {
         checkout.addItemToCart("soup");
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
 
         checkout.removeItemFromCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
     }
 
     @Test
     void removingAWeightedItemFromCartRemovesItemWeightedPriceFromTotal() {
         checkout.addWeightedItemToCart("ground beef", new BigDecimal(1.5));
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(8.98)));
 
         checkout.removeWeightedItemFromCart("ground beef", new BigDecimal(.5));
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.99)));
     }
 
@@ -261,27 +207,19 @@ class CheckoutE2ETests {
     void calculatesTotalForRemovedItemThatInvalidatesSpecial() {
         checkout.addSpecialToInventoryItem(new BuyXForYSpecial(3,new BigDecimal(5), 1), "soup");
         checkout.addItemToCart("soup");
-
         BigDecimal total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(1.89)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
 
         checkout.addItemToCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(5.00)));
 
         checkout.removeItemFromCart("soup");
-
         total = checkout.calculateTotal();
-
         assertThat(total).isEqualTo(BigDecimalFormatter.formatForMoney(new BigDecimal(3.78)));
     }
 }
