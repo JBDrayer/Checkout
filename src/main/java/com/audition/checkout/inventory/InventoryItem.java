@@ -24,7 +24,9 @@ public class InventoryItem {
         return BigDecimalFormatter.formatForMoney(price.subtract(markDown));
     }
 
-    public void setMarkDown(BigDecimal markDown) {
+    void setPrice(BigDecimal price) { this.price = price; }
+
+    void setMarkDown(BigDecimal markDown) {
         this.markDown = markDown;
     }
 

@@ -22,6 +22,7 @@ class CheckoutTest {
     @Mock private Cart cart;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
     private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal itemPrice= new BigDecimal(RandomUtils.nextInt(1,10));
     private BigDecimal markDown = new BigDecimal(RandomUtils.nextInt(1,10));
     private Checkout checkout;
 
@@ -56,6 +57,13 @@ class CheckoutTest {
         checkout.removeWeightedItemFromCart(itemName, weight);
 
         verify(cart).removeWeightedItem(itemName, weight);
+    }
+
+    @Test
+    void adjustsDefaultItemPrice() {
+        checkout.adjustDefaultItemPrice(itemName, itemPrice);
+
+        verify(inventoryManagement).adjustDefaultItemPrice(itemName,itemPrice);
     }
 
     @Test

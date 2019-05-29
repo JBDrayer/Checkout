@@ -23,6 +23,10 @@ public class Checkout {
         cart.removeItem(itemName);
     }
 
+    public void adjustDefaultItemPrice(String itemName, BigDecimal itemPrice) {
+        inventoryManagement.adjustDefaultItemPrice(itemName, itemPrice);
+    }
+
     public void addWeightedItemToCart(String itemName, BigDecimal weight) {
         inventoryManagement.addWeightedItemToCart(itemName, weight, cart);
     }

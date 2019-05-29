@@ -23,6 +23,7 @@ class InventoryTest {
     private ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
     private BigDecimal itemPrice = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal newItemPrice = new BigDecimal(RandomUtils.nextInt(1,10));
     private BigDecimal markDown = new BigDecimal(RandomUtils.nextInt(1,10));
     private InventoryItem inventoryItem = new InventoryItem(itemName, itemPrice);
     private Inventory inventory;
@@ -42,6 +43,14 @@ class InventoryTest {
     @Test
     void throwsExceptionWhenItemNotFoundInInventory() {
         assertThrows(InventoryItemNotFoundException.class, () -> inventory.getItem(""));
+    }
+
+
+    @Test
+    void adjustDefaultItemPrice() {
+        inventory.adjustDefaultItemPrice(itemName, newItemPrice);
+
+        assertThat(inventoryItems.get(0).getPrice()).isEqualTo(BigDecimalFormatter.formatForMoney(newItemPrice));
     }
 
     @Test

@@ -24,6 +24,7 @@ class InventoryManagementTest {
     @Mock private Cart cart;
     private String itemName = RandomStringUtils.randomAlphanumeric(10);
     private BigDecimal weight = new BigDecimal(RandomUtils.nextInt(1,10));
+    private BigDecimal itemPrice = new BigDecimal(RandomUtils.nextInt(1,10));
     private BigDecimal markdown = new BigDecimal(RandomUtils.nextInt(1,10));
     private InventoryManagement inventoryManagement;
 
@@ -48,6 +49,13 @@ class InventoryManagementTest {
         inventoryManagement.addWeightedItemToCart(itemName, weight, cart);
 
         verify(cart).addWeightedItem(inventoryItem, weight);
+    }
+
+    @Test
+    void adjustsDefaultItemPrice() {
+        inventoryManagement.adjustDefaultItemPrice(itemName, itemPrice);
+
+        verify(inventory).adjustDefaultItemPrice(itemName, itemPrice);
     }
 
     @Test

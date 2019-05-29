@@ -16,6 +16,11 @@ public class Inventory {
         return getInventoryItem(itemName);
     }
 
+    public void adjustDefaultItemPrice(String itemName, BigDecimal itemPrice) {
+        InventoryItem inventoryItem = getInventoryItem(itemName);
+        inventoryItem.setPrice(itemPrice);
+    }
+
     public void markDownItem(String itemName, BigDecimal markdown) {
         InventoryItem inventoryItem = getInventoryItem(itemName);
         inventoryItem.setMarkDown(markdown);

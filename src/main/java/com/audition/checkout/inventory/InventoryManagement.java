@@ -27,4 +27,8 @@ public class InventoryManagement {
     public void addSpecialToInventoryItem(ItemSpecial itemspecial, String itemName) {
         inventory.addSpecialToInventoryItem(itemspecial, itemName);
     }
+
+    public void adjustDefaultItemPrice(String itemName, BigDecimal itemPrice) {
+        inventory.adjustDefaultItemPrice(itemName, itemPrice);
+    }
 }
